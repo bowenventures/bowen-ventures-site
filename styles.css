@@ -68,13 +68,12 @@ p {
   max-width: 100%;
 }
 
-/* Logo on the left, navigation on the right; wraps instead of overflowing on narrow phones */
+/* Phones: logo on top, navigation links in a row below it */
 .site-header .container {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
 }
 
 .site-nav {
@@ -82,8 +81,10 @@ p {
   gap: 1.5rem;
 }
 
-/* Navy text links; the current page gets a thin gold underline */
-.site-nav a {
+/* Navy text links with no default underline or visited color.
+   Hover and the current page get a thin gold underline; gold is never used for text. */
+.site-nav a,
+.site-nav a:visited {
   color: var(--accent);
   text-decoration: none;
   font-weight: 600;
@@ -94,10 +95,11 @@ p {
 .site-nav a:hover,
 .site-nav a:focus-visible {
   color: var(--accent-dark);
-  border-bottom-color: var(--accent-dark);
+  border-bottom-color: var(--accent-secondary);
 }
 
 .site-nav a[aria-current="page"] {
+  color: var(--accent-dark);
   border-bottom-color: var(--accent-secondary);
 }
 
@@ -112,6 +114,11 @@ section {
 
 .hero h1 {
   max-width: 22ch;
+}
+
+/* Intro text under a page title (About page) keeps a readable line length */
+.hero p {
+  max-width: 65ch;
 }
 
 .audience,
@@ -206,6 +213,13 @@ section {
 
   .brand img {
     width: 14rem;
+  }
+
+  /* Wider screens: logo left, navigation links in a row on the right */
+  .site-header .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .cards {
